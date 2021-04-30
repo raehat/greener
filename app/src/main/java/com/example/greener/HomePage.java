@@ -36,6 +36,9 @@ public class HomePage extends AppCompatActivity {
                         case R.id.nav_profile:
                             selectedFragment = new ProfileFragment();
                             break;
+                        case R.id.nav_third:
+                            selectedFragment = new ThirdFragment();
+                            break;
                     }
 
                     getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
