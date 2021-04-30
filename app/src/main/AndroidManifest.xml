@@ -9,9 +9,11 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Greener">
-        <activity android:name=".HomePage"></activity>
+        <activity android:name=".MyEvents"></activity>
+        <activity android:name=".HomePage" />
         <activity android:name=".Register" />
         <activity android:name=".Login" />
+        <activity android:name="com.theartofdev.edmodo.cropper.CropImageActivity" />
         <activity android:name=".IntroClass">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

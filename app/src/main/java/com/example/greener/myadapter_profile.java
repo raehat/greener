@@ -29,9 +29,9 @@ public class myadapter_profile extends RecyclerView.Adapter<myadapter_profile.my
     @Override
     public void onBindViewHolder(@NonNull myviewholder holder, int position)
     {
-        holder.img.setImageResource(dataholder_profile.get(position).getImage());
+        /*holder.img.setImageResource(dataholder_profile.get(position).getImage());
         holder.header.setText(dataholder_profile.get(position).getHeader());
-        holder.desc.setText(dataholder_profile.get(position).getDesc());
+        holder.desc.setText(dataholder_profile.get(position).getDesc());*/
     }
 
     @Override

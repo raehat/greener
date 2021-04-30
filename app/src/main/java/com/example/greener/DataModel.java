@@ -2,36 +2,36 @@ package com.example.greener;
 
 public class DataModel
 {
-    int image;
-    String header,desc;
+    String name, des, loc;
 
-    public DataModel(int image, String header, String desc) {
-        this.image = image;
-        this.header = header;
-        this.desc = desc;
+    public DataModel(String name, String des, String loc) {
+        this.name = name;
+        this.des = des;
+        this.loc = loc;
     }
 
-    public int getImage() {
-        return image;
+
+    public String getName() {
+        return name;
     }
 
-    public void setImage(int image) {
-        this.image = image;
+    public void setName(String name) {
+        this.name = name;
     }
 
-    public String getHeader() {
-        return header;
+    public String getDes() {
+        return des;
     }
 
-    public void setHeader(String header) {
-        this.header = header;
+    public void setDes(String des) {
+        this.des = des;
     }
 
-    public String getDesc() {
-        return desc;
+    public String getLoc() {
+        return loc;
     }
 
-    public void setDesc(String desc) {
-        this.desc = desc;
+    public void setLoc(String loc) {
+        this.loc = loc;
     }
 }

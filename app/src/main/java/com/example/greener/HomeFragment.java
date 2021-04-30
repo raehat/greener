@@ -25,7 +25,7 @@ public class HomeFragment extends Fragment {
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         dataholder=new ArrayList<>();
 
-        DataModel ob1=new DataModel(R.drawable.ic_baseline_person_24,"Angular","Web Application");
+        /*DataModel ob1=new DataModel(R.drawable.ic_baseline_person_24,"Angular","Web Application");
         dataholder.add(ob1);
 
         DataModel ob2=new DataModel(R.drawable.ic_baseline_person_24,"C Programming","Embed Programming");
@@ -40,7 +40,7 @@ public class HomeFragment extends Fragment {
         DataModel ob5=new DataModel(R.drawable.ic_baseline_person_24,"Java Programming","Desktop and Web Programming");
         dataholder.add(ob5);
 
-        recyclerView.setAdapter(new myadapter(dataholder));
+        recyclerView.setAdapter(new myadapter(dataholder));*/
         return view;
     }
 }

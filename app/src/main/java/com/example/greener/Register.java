@@ -27,7 +27,7 @@ public class Register extends AppCompatActivity {
         getSupportActionBar().hide();
         Button button3 = findViewById(R.id.button3);
         name= findViewById(R.id.name);
-        email= findViewById(R.id.email);
+        email= findViewById(R.id.username);
         city= findViewById(R.id.city);
         pinn= findViewById(R.id.pinn);
         editTextPhone = findViewById(R.id.no);

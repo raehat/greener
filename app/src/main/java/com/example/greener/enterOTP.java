@@ -33,7 +33,7 @@ public class enterOTP extends AppCompatActivity {
     PinView editTextCode;
     String phoneTemp;
     String name;
-    String email;
+    String username;
     String city;
     String pinn;
     FirebaseFirestore fstore;
@@ -52,7 +52,7 @@ public class enterOTP extends AppCompatActivity {
 
         phoneTemp= getIntent().getExtras().getString("temp");
         name= getIntent().getExtras().getString("name");
-        email= getIntent().getExtras().getString("email");
+        username= getIntent().getExtras().getString("email");
         city= getIntent().getExtras().getString("city");
         pinn= getIntent().getExtras().getString("pinn");
 
@@ -97,13 +97,14 @@ public class enterOTP extends AppCompatActivity {
                                     "Login Successful", Toast.LENGTH_LONG).show();
 
                             userID= mAuth.getCurrentUser().getUid();
-                            DocumentReference documentReference= fstore.collection("users").document(userID);
+                            DocumentReference documentReference= fstore.collection("users").document(FirebaseAuth.getInstance().getCurrentUser().getUid());
                             Map<String, Object> user= new HashMap<>();
                             user.put("fname", name);
                             user.put("City", city);
                             user.put("number", phoneTemp);
                             user.put("pin", pinn);
-                            user.put("email", email);
+                            user.put("username", username);
+                            user.put("points",0);
                             documentReference.set(user).addOnSuccessListener(new OnSuccessListener<Void>() {
                                 @Override
                                 public void onSuccess(Void aVoid) {

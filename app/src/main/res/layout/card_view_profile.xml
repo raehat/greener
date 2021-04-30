@@ -46,6 +46,17 @@
             android:text="This is Description Text"
             android:textSize="20dp" />
 
+        <TextView
+            android:id="@+id/t4"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/t11"
+            android:layout_marginLeft="6dp"
+            android:layout_marginTop="33dp"
+            android:layout_toRightOf="@id/img1"
+            android:text="This is Description Text"
+            android:textSize="20dp" />
+
     </RelativeLayout>
 
 </androidx.cardview.widget.CardView>

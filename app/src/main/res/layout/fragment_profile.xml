@@ -1,13 +1,164 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="@drawable/gradient">
 
-    <androidx.recyclerview.widget.RecyclerView
+
+    <ScrollView
+        android:id="@+id/scr"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:id="@+id/rec_view_profile"/>
+        android:layout_height="match_parent">
 
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginBottom="120dp">
+
+            <TextView
+                android:id="@+id/tran2"
+                android:layout_width="match_parent"
+                android:layout_height="70dp"
+                android:layout_marginTop="50dp"
+                android:gravity="center"
+                android:paddingLeft="30dp"
+                android:paddingTop="14dp"
+                android:paddingRight="30dp"
+                android:shadowColor="#FFFFFF"
+                android:text="Give your plan details"
+                android:textColor="#FFFFFF"
+                android:textSize="20sp"
+                android:textStyle="bold" />
+
+            <ImageView
+                android:id="@+id/imageView3"
+                android:layout_width="353dp"
+                android:layout_height="259dp"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="150dp"
+                android:src="@drawable/insertimg" />
+
+            <EditText
+                android:id="@+id/location"
+                android:layout_width="283dp"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/event_name"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="40dp"
+                android:backgroundTint="#ffffff"
+                android:ems="10"
+                android:gravity="center"
+                android:hint="Enter location"
+                android:textColor="#ffffff"
+                android:textColorHint="#FFFFFF" />
+
+            <EditText
+                android:id="@+id/description"
+                android:layout_width="283dp"
+                android:layout_height="100dp"
+                android:layout_below="@id/location"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="40dp"
+                android:backgroundTint="#ffffff"
+                android:ems="10"
+                android:gravity="center"
+                android:hint="Enter location"
+                android:textColor="#ffffff"
+                android:textColorHint="#FFFFFF" />
+
+            <EditText
+                android:id="@+id/event_name"
+                android:layout_width="300dp"
+                android:layout_height="40dp"
+                android:layout_below="@id/imageView3"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="40dp"
+                android:backgroundTint="#ffffff"
+                android:ems="10"
+                android:gravity="center_horizontal"
+                android:hint="Enter name of event"
+                android:inputType="textPersonName"
+                android:textColor="#FFFFFF"
+                android:textColorHint="#FFFFFF" />
+
+            <EditText
+                android:id="@+id/latitude"
+                android:layout_width="300dp"
+                android:layout_height="40dp"
+                android:layout_below="@id/description"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="40dp"
+                android:backgroundTint="#ffffff"
+                android:ems="10"
+                android:gravity="center_horizontal"
+                android:hint="latitude"
+                android:inputType="textPersonName"
+                android:textColor="#FFFFFF"
+                android:textColorHint="#FFFFFF" />
+
+            <EditText
+                android:id="@+id/longitude"
+                android:layout_width="300dp"
+                android:layout_height="40dp"
+                android:layout_below="@id/latitude"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="40dp"
+                android:backgroundTint="#ffffff"
+                android:ems="10"
+                android:gravity="center_horizontal"
+                android:hint="longitude"
+                android:inputType="textPersonName"
+                android:textColor="#FFFFFF"
+                android:textColorHint="#FFFFFF" />
+
+            <TextView
+                android:id="@+id/city"
+                android:layout_width="1dp"
+                android:layout_height="1dp"
+                android:paddingLeft="10dp"
+                android:text="LOCALITY"
+                android:textColor="#FFFFFF"
+                android:textSize="14sp" />
+
+            <TextView
+                android:id="@+id/uid"
+                android:layout_width="1dp"
+                android:layout_height="1dp"
+                android:paddingLeft="30dp"
+                android:text="LOCALITY"
+                android:textColor="#FFFFFF"
+                android:textSize="14sp" />
+
+            <TextView
+                android:layout_below="@+id/longitude"
+                android:layout_width="match_parent"
+                android:layout_height="300dp"></TextView>
+
+
+        </RelativeLayout>
+
+
+    </ScrollView>
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="79dp"
+        android:layout_marginTop="545dp">
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="#000000">
+            <Button
+                android:id="@+id/submit_article"
+                android:layout_width="350dp"
+                android:layout_height="40dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="10dp"
+                android:layout_centerHorizontal="true"
+                android:gravity="center"
+                android:background="@drawable/round2"
+                android:text="SUBMIT"
+                android:textColor="#ffffff" />
+        </RelativeLayout>
+    </ScrollView>
 </RelativeLayout>

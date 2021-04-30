@@ -1,21 +1,39 @@
 package com.example.greener;
+import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.net.Uri;
 import android.view.LayoutInflater;
         import android.view.View;
         import android.view.ViewGroup;
         import android.widget.ImageView;
         import android.widget.TextView;
 
-        import androidx.annotation.NonNull;
+import androidx.annotation.NonNull;
         import androidx.recyclerview.widget.RecyclerView;
 
-        import java.util.ArrayList;
+import com.bumptech.glide.Glide;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.storage.FileDownloadTask;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
+
+import java.io.File;
+import java.io.IOException;
+import java.util.ArrayList;
 
 public class myadapter extends RecyclerView.Adapter<myadapter.myviewholder>
 {
     ArrayList<DataModel> dataholder;
+    Context context;
+    private FirebaseStorage storage;
+    private StorageReference storageReference;
+    private String imageURL;
 
-    public myadapter(ArrayList<DataModel> dataholder) {
+    public myadapter(Context context, ArrayList<DataModel> dataholder) {
         this.dataholder = dataholder;
+        this.context= context;
     }
 
     @NonNull
@@ -28,9 +46,26 @@ public class myadapter extends RecyclerView.Adapter<myadapter.myviewholder>
     @Override
     public void onBindViewHolder(@NonNull myviewholder holder, int position)
     {
-        holder.img.setImageResource(dataholder.get(position).getImage());
-        holder.header.setText(dataholder.get(position).getHeader());
-        holder.desc.setText(dataholder.get(position).getDesc());
+        holder.name.setText(dataholder.get(position).getName());
+        holder.des.setText(dataholder.get(position).getDes());
+        holder.loc.setText(dataholder.get(position).getLoc());
+
+        storage = FirebaseStorage.getInstance();
+        storageReference = storage.getReference().child("images/" + dataholder.get(position).getName());
+
+        storageReference.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+            @Override
+            public void onSuccess(Uri uri) {
+                imageURL = uri.toString();
+                Glide.with(context).load(imageURL).into(holder.img);
+            }
+        }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception exception) {
+                // Handle any errors
+            }
+        });
+
     }
 
     @Override
@@ -41,13 +76,14 @@ public class myadapter extends RecyclerView.Adapter<myadapter.myviewholder>
     class myviewholder extends RecyclerView.ViewHolder
     {
         ImageView img;
-        TextView header,desc;
+        TextView name, des, loc;
         public myviewholder(@NonNull View itemView)
         {
             super(itemView);
-            img=itemView.findViewById(R.id.img);
-            header=itemView.findViewById(R.id.t);
-            desc=itemView.findViewById(R.id.t1);
+            img=itemView.findViewById(R.id.image);
+            name=itemView.findViewById(R.id.t);
+            des=itemView.findViewById(R.id.t1);
+            loc= itemView.findViewById(R.id.t3);
         }
     }
 }

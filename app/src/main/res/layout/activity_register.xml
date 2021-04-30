@@ -29,7 +29,7 @@
         android:layout_marginStart="27dp"
         android:layout_marginLeft="27dp"
         android:layout_marginBottom="47dp"
-        app:layout_constraintBottom_toTopOf="@+id/email"
+        app:layout_constraintBottom_toTopOf="@+id/username"
         app:layout_constraintStart_toStartOf="parent" />
 
     <EditText
@@ -97,17 +97,17 @@
         android:textColorHint="#FFFFFF"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/email" />
+        app:layout_constraintTop_toBottomOf="@+id/username" />
 
     <EditText
-        android:id="@+id/email"
+        android:id="@+id/username"
         android:layout_width="312dp"
         android:layout_height="40dp"
         android:layout_marginStart="36dp"
         android:layout_marginTop="46dp"
         android:layout_marginEnd="33dp"
         android:ems="10"
-        android:hint="Enter e-mail address"
+        android:hint="Enter username"
         android:inputType="textEmailAddress"
         android:textColor="#FFFFFF"
         android:textColorHighlight="#FFFFFF"
