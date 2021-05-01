@@ -2,9 +2,9 @@
     <!-- Base application theme. -->
     <style name="Theme.Greener" parent="Theme.AppCompat.DayNight.DarkActionBar">
         <!-- Primary brand color. -->
-        <item name="colorPrimary">@color/purple_200</item>
-        <item name="colorPrimaryVariant">@color/purple_700</item>
-        <item name="colorOnPrimary">@color/black</item>
+        <item name="colorPrimary">#a0d4cc</item>
+        <item name="colorPrimaryVariant">#a0d4cc</item>
+        <item name="colorOnPrimary">#a0d4cc</item>
         <!-- Secondary brand color. -->
         <item name="colorSecondary">@color/teal_200</item>
         <item name="colorSecondaryVariant">@color/teal_200</item>

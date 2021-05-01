@@ -76,7 +76,7 @@ public class ProfileFragment extends Fragment {
                         .get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
                     @Override
                     public void onSuccess(DocumentSnapshot documentSnapshot) {
-                        if (documentSnapshot.getString("eventName")==null){
+                        if (documentSnapshot.getString("eventName")==null||documentSnapshot.getString("eventName")==""){
                             object1.put("eventName", eventName.getText().toString());
                         }
                         else {

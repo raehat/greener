@@ -104,7 +104,8 @@ public class enterOTP extends AppCompatActivity {
                             user.put("number", phoneTemp);
                             user.put("pin", pinn);
                             user.put("username", username);
-                            user.put("points",0);
+                            user.put("points","0");
+                            user.put("eventName","");
                             documentReference.set(user).addOnSuccessListener(new OnSuccessListener<Void>() {
                                 @Override
                                 public void onSuccess(Void aVoid) {

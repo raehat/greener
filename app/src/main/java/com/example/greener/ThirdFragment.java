@@ -62,6 +62,7 @@ public class ThirdFragment extends Fragment {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
                                 FirebaseAuth.getInstance().signOut();
+                                startActivity(new Intent(getContext(), MainActivity.class));
                             }
                         }).setNegativeButton("no", null).show();
             }

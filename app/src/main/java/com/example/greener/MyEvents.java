@@ -58,6 +58,12 @@ public class MyEvents extends AppCompatActivity {
                     progressDialog.dismiss();
                     return;
                 }
+                if (eventName=="")
+                {
+                    Toast.makeText(MyEvents.this, "No events planned", Toast.LENGTH_SHORT).show();
+                    progressDialog.dismiss();
+                    return;
+                }
                 list= Arrays.asList(eventName.split(",", 0));
                 for (String s: list)
                 {
