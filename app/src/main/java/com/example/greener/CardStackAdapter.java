@@ -1,10 +1,14 @@
 package com.example.greener;
 
+import android.content.Context;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.net.Uri;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -26,11 +30,13 @@ public class CardStackAdapter extends RecyclerView.Adapter<CardStackAdapter.View
     private FirebaseStorage storage;
     private StorageReference storageReference;
 
-    public CardStackAdapter(List<ItemModel> items) {
+    public CardStackAdapter(Context context, List<ItemModel> items) {
+        this.context= context;
         this.items = items;
     }
 
     private List<ItemModel> items;
+    private Context context;
 
     public List<ItemModel> getItems() {
         return items;
@@ -52,6 +58,17 @@ public class CardStackAdapter extends RecyclerView.Adapter<CardStackAdapter.View
         holder.heading.setText(items.get(position).getHeading());
         holder.desc.setText(items.get(position).getDesc());
         holder.location.setText(items.get(position).getCity());
+
+        holder.map.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                float latitude= (float) 26.449923;
+                float longitude= (float) 80.331871;
+                String geoUri = "http://maps.google.com/maps?q=loc:" + latitude + "," + longitude;
+                Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(geoUri));
+                context.startActivity(intent);
+            }
+        });
 
         storage = FirebaseStorage.getInstance();
         storageReference = storage.getReference().child("images/" + items.get(position).getImage());
@@ -92,6 +109,7 @@ public class CardStackAdapter extends RecyclerView.Adapter<CardStackAdapter.View
     }
 
     class ViewHolder extends RecyclerView.ViewHolder{
+        Button map;
         ImageView image;
         TextView heading, desc, location;
         ViewHolder(@NonNull View itemView) {
@@ -100,6 +118,7 @@ public class CardStackAdapter extends RecyclerView.Adapter<CardStackAdapter.View
             heading= itemView.findViewById(R.id.item_heading);
             desc= itemView.findViewById(R.id.item_desc);
             location= itemView.findViewById(R.id.item_city);
+            map= itemView.findViewById(R.id.map);
         }
 
 

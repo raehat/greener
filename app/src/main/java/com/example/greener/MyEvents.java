@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.app.ProgressDialog;
 import android.os.Bundle;
 import android.widget.Toast;
 
@@ -26,17 +27,23 @@ public class MyEvents extends AppCompatActivity {
     private ArrayList<DataModel> dataholder;
     FirebaseFirestore firestore;
     private List<String> list;
+    ProgressDialog progressDialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_my_events);
 
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setTitle("My Events");
         recyclerView= findViewById(R.id.rec_view_profile);
         recyclerView.setLayoutManager(new LinearLayoutManager(MyEvents.this));
         dataholder=new ArrayList<>();
 
         firestore= FirebaseFirestore.getInstance();
+        progressDialog= new ProgressDialog(MyEvents.this);
+        progressDialog.setMessage("loading...");
+        progressDialog.show();
 
         DocumentReference documentReference= firestore.collection("users")
                 .document(FirebaseAuth.getInstance().getCurrentUser().getUid());
@@ -45,6 +52,12 @@ public class MyEvents extends AppCompatActivity {
             @Override
             public void onSuccess(DocumentSnapshot documentSnapshot) {
                 String eventName= documentSnapshot.getString("eventName");
+                if (eventName==null)
+                {
+                    Toast.makeText(MyEvents.this, "No events planned", Toast.LENGTH_SHORT).show();
+                    progressDialog.dismiss();
+                    return;
+                }
                 list= Arrays.asList(eventName.split(",", 0));
                 for (String s: list)
                 {
@@ -61,6 +74,7 @@ public class MyEvents extends AppCompatActivity {
                         }
                     });
                 }
+                progressDialog.dismiss();
             }
         });
 

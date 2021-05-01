@@ -63,7 +63,7 @@
                 android:backgroundTint="#ffffff"
                 android:ems="10"
                 android:gravity="center"
-                android:hint="Enter location"
+                android:hint="description"
                 android:textColor="#ffffff"
                 android:textColorHint="#FFFFFF" />
 

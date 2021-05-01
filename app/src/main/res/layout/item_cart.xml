@@ -44,9 +44,14 @@
             android:id="@+id/item_city"
             android:layout_width="50dp"
             android:layout_height="wrap_content"
-            android:textStyle="bold"
             android:textColor="@android:color/white"
-            android:textSize="20sp"/>
+            android:textSize="16sp"/>
+
+        <Button
+            android:id="@+id/map"
+            android:layout_width="128dp"
+            android:layout_height="82dp"
+            android:text="show on map" />
 
     </LinearLayout>
 

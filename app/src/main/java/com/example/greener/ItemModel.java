@@ -36,7 +36,7 @@ public class ItemModel {
         this.city = city;
     }
 
-    public ItemModel(String image, String heading, String desc, String city) {
+    public ItemModel(String heading, String desc, String image,String city) {
         this.image = image;
         this.heading = heading;
         this.desc = desc;

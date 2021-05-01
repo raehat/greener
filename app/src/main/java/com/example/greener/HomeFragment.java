@@ -1,5 +1,6 @@
 package com.example.greener;
 
+import android.app.ProgressDialog;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -40,6 +41,7 @@ public class HomeFragment extends Fragment {
     CardStackAdapter adapter;
     CardStackView cardStackView;
     List<ItemModel> dataholder;
+    ProgressDialog progressDialog;
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -47,6 +49,9 @@ public class HomeFragment extends Fragment {
 
         firestore= FirebaseFirestore.getInstance();
         dataholder=new ArrayList<>();
+        progressDialog= new ProgressDialog(getContext());
+        progressDialog.setMessage("loading...");
+        progressDialog.show();
 
         firestore.collection("events").get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
             @Override
@@ -57,8 +62,9 @@ public class HomeFragment extends Fragment {
                     ,querySnapshot.getString("imageCode"), querySnapshot.getString("location"));
                     dataholder.add(model);
                 }
-                adapter = new CardStackAdapter(dataholder);
+                adapter = new CardStackAdapter(getContext(), dataholder);
                 cardStackView.setAdapter(adapter);
+                progressDialog.dismiss();
             }
         });
 
@@ -74,16 +80,16 @@ public class HomeFragment extends Fragment {
             public void onCardSwiped(Direction direction) {
                 Log.d(TAG, "onCardSwiped: p=" + manager.getTopPosition() + " d=" + direction);
                 if (direction == Direction.Right){
-                    Toast.makeText(getActivity(), "Direction Right", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getActivity(), "", Toast.LENGTH_SHORT).show();
                 }
                 if (direction == Direction.Top){
-                    Toast.makeText(getActivity(), "Direction Top", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getActivity(), "", Toast.LENGTH_SHORT).show();
                 }
                 if (direction == Direction.Left){
-                    Toast.makeText(getActivity(), "Direction Left", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getActivity(), "", Toast.LENGTH_SHORT).show();
                 }
                 if (direction == Direction.Bottom){
-                    Toast.makeText(getActivity(), "Direction Bottom", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getActivity(), "", Toast.LENGTH_SHORT).show();
                 }
 
                 // Paginating
