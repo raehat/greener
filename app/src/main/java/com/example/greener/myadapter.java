@@ -22,6 +22,7 @@ import com.google.firebase.storage.StorageReference;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.List;
 
 public class myadapter extends RecyclerView.Adapter<myadapter.myviewholder>
 {
@@ -34,6 +35,9 @@ public class myadapter extends RecyclerView.Adapter<myadapter.myviewholder>
     public myadapter(Context context, ArrayList<DataModel> dataholder) {
         this.dataholder = dataholder;
         this.context= context;
+    }
+
+    public myadapter(List<DataModel> addList) {
     }
 
     @NonNull
