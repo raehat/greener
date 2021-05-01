@@ -17,6 +17,11 @@ import androidx.recyclerview.widget.DiffUtil;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QuerySnapshot;
 import com.yuyakaido.android.cardstackview.CardStackLayoutManager;
 import com.yuyakaido.android.cardstackview.CardStackListener;
 import com.yuyakaido.android.cardstackview.CardStackView;
@@ -28,24 +33,42 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class HomeFragment extends Fragment {
-    RecyclerView recyclerView;
+
+    FirebaseFirestore firestore;
     private CardStackLayoutManager manager;
     private static final String TAG = "HomeFragment";
-    private myadapter adapter;
-    ArrayList<DataModel> dataholder;
+    CardStackAdapter adapter;
+    CardStackView cardStackView;
+    List<ItemModel> dataholder;
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view =  inflater.inflate(R.layout.fragment_home,container,false);
-        recyclerView=view.findViewById(R.id.rec_view);
-        recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+
+        firestore= FirebaseFirestore.getInstance();
         dataholder=new ArrayList<>();
+
+        firestore.collection("events").get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                for (DocumentSnapshot querySnapshot: task.getResult())
+                {
+                    ItemModel model= new ItemModel(querySnapshot.getString("eventName"),querySnapshot.getString("description")
+                    ,querySnapshot.getString("imageCode"), querySnapshot.getString("location"));
+                    dataholder.add(model);
+                }
+                adapter = new CardStackAdapter(dataholder);
+                cardStackView.setAdapter(adapter);
+            }
+        });
 
         manager = new CardStackLayoutManager(getActivity(), new CardStackListener() {
             @Override
             public void onCardDragging(Direction direction, float ratio) {
                 Log.d(TAG, "onCardDragging: d=" + direction.name() + " ratio=" + ratio);
             }
+
+
 
             @Override
             public void onCardSwiped(Direction direction) {
@@ -89,7 +112,13 @@ public class HomeFragment extends Fragment {
 
             }
         });
-        CardStackView cardStackView = view.findViewById(R.id.card_stack_view);
+
+
+        /*List<ItemModel> items = new ArrayList<>();
+        ItemModel ob1=new ItemModel("A","Angular","Web Application");
+        items.add(ob1);*/
+
+        cardStackView = view.findViewById(R.id.card_stack_view);
         manager.setStackFrom(StackFrom.None);
         manager.setVisibleCount(3);
         manager.setTranslationInterval(8.0f);
@@ -100,9 +129,10 @@ public class HomeFragment extends Fragment {
         manager.setCanScrollHorizontal(true);
         manager.setSwipeableMethod(SwipeableMethod.Manual);
         manager.setOverlayInterpolator(new LinearInterpolator());
-        adapter = new myadapter(addList());
+
         cardStackView.setLayoutManager(manager);
-        cardStackView.setAdapter(adapter);
+        /*adapter=new CardStackAdapter(items);*/
+
         cardStackView.setItemAnimator(new DefaultItemAnimator());
 
         /*DataModel ob1=new DataModel(R.drawable.ic_baseline_person_24,"Angular","Web Application");
@@ -124,27 +154,21 @@ public class HomeFragment extends Fragment {
         return view;
     }
 
-    private List<DataModel> addList() {
-        List<DataModel> items = new ArrayList<>();
-        DataModel ob1=new DataModel("A","Angular","Web Application");
-        items.add(ob1);
+    private List<ItemModel> addList() {
+        List<ItemModel> items = new ArrayList<>();
+        //ItemModel ob1=new ItemModel("A","Angular","Web Application");
+        //items.add(ob1);
 
-        DataModel ob2=new DataModel("B","C Programming","Embed Programming");
-        items.add(ob2);
 
-        DataModel ob3=new DataModel("C","C++ Programming","Embed Programming");
-        items.add(ob3);
-
-        DataModel ob4=new DataModel("D",".NET Programming","Desktop and Web Programming");
-        items.add(ob4);
         return items;
     }
     private void paginate() {
-        //List<DataModel> old = adapter.getItems();
-        List<DataModel> baru = new ArrayList<>(addList());
-        //CardStackCallback callback = new CardStackCallback(old, baru);
-        //DiffUtil.DiffResult hasil = DiffUtil.calculateDiff(callback);
-        //adapter.setItems(baru);
-        //hasil.dispatchUpdatesTo(adapter);
+        List<ItemModel> old = adapter.getItems();
+        List<ItemModel> baru = new ArrayList<>(dataholder);
+        CardStackCallback callback = new CardStackCallback(old, baru);
+        DiffUtil.DiffResult hasil = DiffUtil.calculateDiff(callback);
+        adapter.setItems(baru);
+        hasil.dispatchUpdatesTo(adapter);
     }
+
 }

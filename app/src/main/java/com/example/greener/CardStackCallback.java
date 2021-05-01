@@ -5,9 +5,9 @@ import androidx.recyclerview.widget.DiffUtil;
 import java.util.List;
 
 public class CardStackCallback extends DiffUtil.Callback{
-    private List<DataModel> old, baru;
+    public List<ItemModel> old, baru;
 
-    public CardStackCallback(List<DataModel> old, List<DataModel> baru) {
+    public CardStackCallback(List<ItemModel> old, List<ItemModel> baru) {
         this.old = old;
         this.baru = baru;
     }
